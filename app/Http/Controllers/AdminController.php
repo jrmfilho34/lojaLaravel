@@ -8,6 +8,7 @@ use App\Feminino;
 use App\ProdutosFotos;
 use Illuminate\Support\Facades\DB;
 
+
 class AdminController extends Controller
 {
 
@@ -29,6 +30,8 @@ class AdminController extends Controller
     public function index()
     {
         $cont = Feminino::all()->count();
+        // $value = $request->session()->get('key');
+        // dd($value);
 
         return view('Admin.Admin',['cont'=>$cont]);
     }
@@ -40,19 +43,22 @@ class AdminController extends Controller
        // $results = DB::select('select * from users where id = :id', ['id' => 1]);
        //dd($PosteA);
 
-        if ($request->file('file')) {
-
-                $image = $request->file('file');
+        if ($request->file('fileUpload')) {
+            # code...
+        
+                $image = $request->file('fileUpload');
+                $image1 = $request->file('fileUpload1');
+                $image2 = $request->file('fileUpload2');
                 $imageName = ($PosteA +1)."_".time().$image->getClientOriginalName();
+                $imageName1 = ($PosteA +1)."_".time().$image1->getClientOriginalName();
+                $imageName2 = ($PosteA +1)."_".time().$image2->getClientOriginalName();
+
                 $upload_success = $image->move(public_path('upload'),$imageName);
+                $upload_success1 = $image1->move(public_path('upload'),$imageName1);
+                $upload_success2 = $image2->move(public_path('upload'),$imageName2);
                 ProdutosFotos::create(['product_id' => ($PosteA +1),'filename' => $imageName]);
-                if ($upload_success) {
-                return response()->json($upload_success, 200);
-                }
-                // Else, return error 400
-                else {
-                return response()->json('error', 400);
-                }
+                ProdutosFotos::create(['product_id' => ($PosteA +1),'filename' => $imageName1]);
+                ProdutosFotos::create(['product_id' => ($PosteA +1),'filename' => $imageName2]);
         }
         $Poste= new Feminino();
         $Poste->categoria=$request->post('categoria');

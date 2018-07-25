@@ -1,25 +1,5 @@
 function ekUpload(){
   function Init() {
-              /*     <div class="uploader">  
-                        <input id="file-upload2" type="file" name="fileUpload2" accept="image/*" />
-                        <label for="file-upload2" id="file-drag2">
-                          <img id="file-image" src="#" alt="Preview" class="hidden">
-                          <div id="start">
-                            <i class="fa fa-download" aria-hidden="true"></i>
-                            <div>Selecione outra imagem</div>
-                            <div id="notimage" class="hidden">Please select an image</div>
-                            <span id="file-upload-btn" class="btn btn-primary">Clique aqui</span>
-                          </div>
-                          <div id="response" class="hidden">
-                            <div id="messages"></div>
-                            <progress class="progress" id="file-progress" value="0">
-                              <span>0</span>%
-                            </progress>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-                  </div>*/
 
     console.log("Upload Initialised");
 

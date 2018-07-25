@@ -18,7 +18,7 @@
                   <input name="file" type="file" multiple accept="image/jpeg, image/png, image/jpg" />
                   </div>
               </form>-->
-          <form action="{{ route('postar')}}" method="POST" enctype="multipart/form-data">
+          <form id="file-upload-form" action="{{ route('postar')}}" method="POST" enctype="multipart/form-data">
                 <div class="container">
                   <div class="row">
                     <div class="col-sm">

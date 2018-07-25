@@ -10,11 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'InicioController@contador')->name('welcome');
 
-
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome',['dado' => '1']);
-})->name('welcome');
+})->name('welcome');*/
 Route::get('/produtos', function () {
     return view('produtos',['dado'=> '2']);
 })->name('produtos');

@@ -245,7 +245,7 @@
                         <div class="tabbed_container">
                             <div class="tabs">
                                 <ul class="clearfix">
-                                    <li class="active">Featured</li>
+                                    <li class="active">Featured {{ $tempo }}</li>
                                     <li>On Sale</li>
                                     <li>Best Rated</li>
                                 </ul>
@@ -255,15 +255,17 @@
                             <!-- Product Panel -->
                             <div class="product_panel panel active">
                                 <div class="featured_slider slider">
-
+ @foreach ($fotos as $foto)
+    @foreach ($feminino as $ts)
+        @if(($foto->product_id) === ($ts->id))
                                     <!-- Slider Item -->
                                     <div class="featured_slider_item">
                                         <div class="border_active"></div>
                                         <div class="product_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_1.png" alt=""></div>
+                                            <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="upload\{{ $foto->filename }}" alt=""></div>
                                             <div class="product_content">
-                                                <div class="product_price discount">$225<span>$300</span></div>
-                                                <div class="product_name"><div><a href="product.html">Huawei MediaPad...</a></div></div>
+                                                <div class="product_price discount">{{ $ts->preco }}<span>$300</span></div>
+                                                <div class="product_name"><div><a href="product.html">{{ $foto->product_id}} {{ $ts->titulo }}</a></div></div>
                                                 <div class="product_extras">
                                                     <div class="product_color">
                                                         <input type="radio" checked name="product_color" style="background:#b19c83">
@@ -280,6 +282,9 @@
                                             </ul>
                                         </div>
                                     </div>
+        @endif
+    @endforeach
+@endforeach
 
                                     <!-- Slider Item -->
                                     <div class="featured_slider_item">
