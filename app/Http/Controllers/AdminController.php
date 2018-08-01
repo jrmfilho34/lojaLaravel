@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Feminino;
+use App\User;
+use App\Models\Access;
 use App\ProdutosFotos;
 use Illuminate\Support\Facades\DB;
+use App\Charts\AdminChart;
 
 
 class AdminController extends Controller
@@ -30,10 +33,97 @@ class AdminController extends Controller
     public function index()
     {
         $cont = Feminino::all()->count();
-        // $value = $request->session()->get('key');
-        // dd($value);
+        $User = User::all()->count();
+        $NA =  Access::all()->count();
+        $Acesso =  Access::all();
+        $array = [100, 200, 300];
+        $janeiro =0;
+        $fevereiro =0;
+        $marco =0;
+        $abril =0;
+        $maio =0;
+        $junho=0;
+        $julho=0;
+        $agosto =0;
+        $setembro=0;
+        $outubro =0;
+        $novembro=0;
+        $dezembro=0;
 
-        return view('Admin.Admin',['cont'=>$cont]);
+        foreach ($Acesso as $key) {
+            $mes = explode("-",$key->datetime);
+            echo $mes[1];
+
+            if ($mes[1] === "01") {
+                $janeiro = $janeiro + 1;
+                
+            }
+            if ($mes[1] === "02") {
+                $fevereiro = $fevereiro + 1;
+            }
+
+            if ($mes[1] === "03") {
+                $marco = $marco + 1;
+                echo $marco;
+            }
+
+            if ($mes[1] === "04") {
+                $abril = $abril + 1;
+                
+            }
+
+            if ($mes[1] === "05") {
+                $maio = $maio + 1;
+             
+            }
+
+            if ($mes[1] === "06") {
+                $junho = 1;
+               
+            }
+
+            if ($mes[1] === "07") {
+                $julho = $julho + 1;
+                
+            }
+
+            if ($mes[1] === "08") {
+                $agosto = $agosto + 1;
+            }
+
+            if ($mes[1] === "09") {
+                $setembro = $setembro + 1;
+            }
+
+            if ($mes[1] === "10") {
+                $outubro = $outubro + 1;
+            }
+
+            if ($mes[1] === "11") {
+                $novembro = $novembro + 1;
+            }
+
+            if ($mes[1] === "12") {
+                $dezembro = $dezembro + 1;
+            }
+           
+        }
+    
+         $chart = new AdminChart;
+        $chart->dataset('Acessos','bar',[$fevereiro,$marco,$abril,$maio,$junho,$julho,$agosto,$setembro,$outubro,$novembro,$dezembro])->options([
+              'borderColor'=>'#0366D4',
+              'backgroundColor' =>'#0366D6'
+            ]);
+
+        return view('Admin.Admin',['cont'=>$cont, 'User'=>$User,'NA'=>$NA, 'chart'=>$chart]);
+    }
+
+    public function usuario()
+    {
+       $user = User::all();
+       $acesso =  Access::all();
+       $NA =  Access::all()->count();
+      return view('Admin.usuarios',['acesso'=>$acesso, 'user'=>$user,'NA'=>$NA]);
     }
 
     public function armazenar(Request $request)
@@ -105,8 +195,6 @@ class AdminController extends Controller
               }
         }
    
-   
-
        DB::table('femininos')
             ->where('id', $id)
             ->update(['titulo' => $titulo,

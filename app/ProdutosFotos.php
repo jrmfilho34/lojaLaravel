@@ -12,5 +12,8 @@ class ProdutosFotos extends Model
     {
         return $this->belongsTo('App\Feminino','product_id');
     }
+    
 
 }
+
+

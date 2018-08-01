@@ -14,7 +14,7 @@ class InicioController extends Controller
 {
     public function contador(){
 
-      $start = microtime(true);
+      //$start = 1;
       if(!Cache::has('fotos')){
       Cache::put('fotos', DB::table('Produtos_Fotos')->get(),1);
       Cache::put('feminino', DB::table('femininos')->get(),1);
@@ -24,9 +24,9 @@ class InicioController extends Controller
       //$fotos =DB::table('Produtos_Fotos')->get();
       //$feminino =DB::table('femininos')->get();
       $feminino = Cache::get('feminino');
-      $tempo = ($start - microtime(true))*1000;
+     // $tempo = $tempo + $start;
      // dd($tempo);
 
-      return view('welcome',['dado' => '1', 'fotos'=> $fotos,'feminino'=> $feminino, 'tempo' => $tempo]);
+      return view('welcome',['dado' => '1', 'fotos'=> $fotos,'feminino'=> $feminino]);
     }
 }

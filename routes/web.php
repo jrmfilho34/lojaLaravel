@@ -28,7 +28,8 @@ Route::get('/carinho', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/contador', 'HomeController@contador')->name('contador');
+Route::get('/usuarios', 'AdminController@usuario')->name('usuarios');
 
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::post('/postar','AdminController@armazenar')->name('postar');
